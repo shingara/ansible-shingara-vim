@@ -1,0 +1,16 @@
+---
+
+- name: install vim package
+  apt: name=vim-nox state=latest
+
+- name: clone shingara vimrc
+  git: repo=https://github.com/shingara/vim-conf.git dest=~/vim-conf
+
+- name: link vimrc directory
+  file: state=link src=~/vim-conf/vimrc path=~/.vimrc
+
+- name: Install Vundle
+  git: repo=http://github.com/gmarik/vundle.git dest=~/.vim/bundle/vundle
+
+- name: Install vundle plugin
+  shell: vim +BundleInstall +qall
